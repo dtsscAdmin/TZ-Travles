@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Zone Travels — Asia's Finest Destinations</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0A1628;
+  --ink2:#1C2E45;
+  --amber:#E8A830;
+  --amber2:#F5C455;
+  --amber3:#9A6B10;
+  --sage:#1B4D3E;
+  --sage2:#2A6E58;
+  --cream:#FBF6EE;
+  --cream2:#F3EBD8;
+  --white:#FFFFFF;
+  --mid:#6B7280;
+  --light:#A0AEC0;
+  --ff:'Fraunces',serif;
+  --fb:'Plus Jakarta Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--ink);background:var(--cream);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#0A1628}
+::-webkit-scrollbar-thumb{background:var(--amber);border-radius:3px}
+
+/* ─── NAV ─── */
+#nav{position:fixed;top:0;width:100%;z-index:999;transition:.4s all;padding:20px 5%}
+#nav.solid{background:rgba(10,22,40,.96);backdrop-filter:blur(16px);padding:13px 5%;box-shadow:0 4px 30px rgba(0,0,0,.35)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-badge{width:42px;height:42px;background:linear-gradient(135deg,var(--amber),var(--amber3));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-name{font-family:var(--ff);font-size:21px;font-weight:900;color:#fff;letter-spacing:-.3px;line-height:1}
+.logo-sub{font-size:9px;color:var(--amber);letter-spacing:3px;text-transform:uppercase;margin-top:1px;display:block}
+.nav-menu{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-menu a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;font-weight:500;transition:.2s}
+.nav-menu a:hover{color:var(--amber)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.cur-switch{display:flex;background:rgba(255,255,255,.1);border-radius:22px;padding:3px 4px}
+.cs-btn{padding:5px 13px;border-radius:18px;font-size:11.5px;font-weight:700;border:none;background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:.2s;font-family:var(--fb)}
+.cs-btn.active{background:var(--amber);color:var(--ink)}
+.nav-cta{background:linear-gradient(135deg,var(--amber),var(--amber3));color:var(--ink);padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;transition:.3s;white-space:nowrap}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,168,48,.4)}
+
+/* ─── HERO ─── */
+.hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=1800&q=85') center/cover no-repeat;transform:scale(1.06);transition:transform 8s ease}
+.hero-img.loaded{transform:scale(1)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,22,40,.88) 0%,rgba(10,22,40,.65) 55%,rgba(10,22,40,.2) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 5%;max-width:720px}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(232,168,48,.14);border:1px solid rgba(232,168,48,.4);border-radius:30px;padding:8px 18px;margin-bottom:28px}
+.hero-chip-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px #4ADE80;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-chip span{color:var(--amber);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.hero h1{font-family:var(--ff);font-size:clamp(46px,6vw,80px);color:#fff;line-height:1.04;font-weight:900;margin-bottom:20px}
+.hero h1 em{color:var(--amber);font-style:italic;font-weight:700}
+.hero p{color:rgba(255,255,255,.68);font-size:17px;line-height:1.75;max-width:500px;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-amber{display:inline-block;background:linear-gradient(135deg,var(--amber),var(--amber3));color:var(--ink);padding:15px 32px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:.3s;border:none;cursor:pointer}
+.btn-amber:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(232,168,48,.4)}
+.btn-ghost{display:inline-block;border:2px solid rgba(255,255,255,.3);color:#fff;padding:15px 32px;border-radius:8px;font-weight:500;font-size:14px;text-decoration:none;transition:.3s;cursor:pointer;background:transparent}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+/* floating dest badges */
+.hero-badges{position:absolute;right:4%;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;gap:10px}
+.hb{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.08);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:11px 17px;transition:.3s;text-decoration:none;min-width:195px}
+.hb:hover,.hb.act{background:rgba(232,168,48,.15);border-color:rgba(232,168,48,.45)}
+.hb.dim{opacity:.5;cursor:default}
+.hb-flag{font-size:22px}
+.hb-info{flex:1}
+.hb-name{font-size:13px;font-weight:700;color:#fff}
+.hb-status{font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.5px}
+.hb-status.live{color:#4ADE80;font-weight:700}
+.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--amber),transparent)}
+@media(max-width:1000px){.hero-badges{display:none}}
+
+/* ─── DEST PILLS ─── */
+.dest-pills{background:var(--ink);padding:0 5%}
+.dp-inner{display:flex;overflow-x:auto;gap:0;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.07)}
+.dp-inner::-webkit-scrollbar{display:none}
+.dp{display:flex;align-items:center;gap:9px;padding:18px 24px;border-bottom:3px solid transparent;cursor:pointer;transition:.3s;white-space:nowrap;flex-shrink:0;text-decoration:none}
+.dp.on{border-bottom-color:var(--amber)}
+.dp-flag{font-size:19px}
+.dp-name{font-size:13px;font-weight:600;color:rgba(255,255,255,.55);transition:.2s}
+.dp.on .dp-name{color:var(--amber)}
+.dp-tag{font-size:9px;font-weight:800;letter-spacing:1.2px;padding:2px 8px;border-radius:10px;text-transform:uppercase}
+.tag-live{background:rgba(74,222,128,.12);color:#4ADE80;border:1px solid rgba(74,222,128,.3)}
+.tag-soon{background:rgba(255,255,255,.05);color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.08)}
+
+/* ─── SECTION GLOBALS ─── */
+.lbl{display:block;color:var(--amber);font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.h2{font-family:var(--ff);font-size:clamp(28px,3.5vw,44px);font-weight:900;line-height:1.1;margin-bottom:14px}
+.h2.white{color:#fff}
+.desc{color:var(--mid);font-size:15px;line-height:1.75;max-width:520px}
+.desc.light{color:rgba(255,255,255,.55)}
+.sec-head{margin-bottom:56px}
+.sec-head.center{text-align:center}.sec-head.center .desc{margin:0 auto}
+section{padding:90px 5%}
+
+/* ─── 5-DEST GRID ─── */
+.dest-section{background:var(--cream)}
+.dest-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.dcard{border-radius:18px;overflow:hidden;position:relative;height:440px;cursor:pointer;transition:.45s}
+.dcard.dim{filter:saturate(.35) brightness(.75);cursor:default}
+.dcard:not(.dim):hover{transform:translateY(-12px);box-shadow:0 32px 70px rgba(0,0,0,.25)}
+.dcard-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:.55s}
+.dcard:not(.dim):hover .dcard-img{transform:scale(1.08)}
+.dcard-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.15) 55%,transparent 100%)}
+.dcard-top{position:absolute;top:16px;right:16px;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+.dcard-flag{font-size:28px}
+.dpill{font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:10px;text-transform:uppercase}
+.dpill.live{background:rgba(74,222,128,.2);color:#4ADE80;border:1px solid rgba(74,222,128,.4)}
+.dpill.soon{background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.2)}
+.dcard-body{position:absolute;bottom:0;left:0;right:0;padding:22px}
+.dcard-stage{display:inline-block;background:rgba(232,168,48,.18);border:1px solid rgba(232,168,48,.4);color:var(--amber);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;border-radius:8px;margin-bottom:8px}
+.dcard-name{font-family:var(--ff);font-size:22px;font-weight:900;color:#fff;margin-bottom:4px}
+.dcard-spots{color:rgba(255,255,255,.58);font-size:11.5px;line-height:1.6;margin-bottom:10px}
+.dcard-notify{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:10.5px;font-weight:600;padding:5px 13px;border-radius:10px;cursor:pointer;transition:.3s;margin-top:4px;font-family:var(--fb)}
+.dcard-notify:hover{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+
+/* ─── ROADMAP ─── */
+.roadmap{background:var(--ink);padding:70px 5%}
+.rm-row{display:flex;align-items:flex-start;justify-content:center;gap:0;max-width:940px;margin:48px auto 0}
+.rm-item{flex:1;display:flex;flex-direction:column;align-items:center;position:relative}
+.rm-circle{width:68px;height:68px;border-radius:50%;border:3px solid;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;transition:.3s;position:relative;z-index:1}
+.rm-circle.live{background:linear-gradient(135deg,var(--amber),var(--amber3));border-color:var(--amber);box-shadow:0 0 0 8px rgba(232,168,48,.18)}
+.rm-circle.plan{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15)}
+.rm-line{position:absolute;top:34px;left:calc(50% + 34px);right:calc(-50% + 34px);height:2px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,.1));z-index:0}
+.rm-item:last-child .rm-line{display:none}
+.rm-name{font-family:var(--ff);font-size:15px;font-weight:700;color:#fff;text-align:center;margin-bottom:3px}
+.rm-yr{font-size:11px;color:rgba(255,255,255,.4);text-align:center;margin-bottom:6px}
+.rm-pill{font-size:9px;font-weight:800;letter-spacing:1.2px;padding:3px 10px;border-radius:10px;text-transform:uppercase;text-align:center}
+.rm-pill.live{background:rgba(74,222,128,.15);color:#4ADE80;border:1px solid rgba(74,222,128,.35)}
+.rm-pill.plan{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12)}
+
+/* ─── PACKAGES ─── */
+.packages-sec{background:var(--ink2)}
+.pkg-filter{display:flex;justify-content:center;gap:8px;margin-bottom:46px;flex-wrap:wrap}
+.pfbtn{padding:9px 22px;border-radius:25px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);background:transparent;transition:.3s;font-family:var(--fb)}
+.pfbtn.on,.pfbtn:hover{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pcard{border-radius:18px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);transition:.35s;cursor:pointer;display:flex;flex-direction:column}
+.pcard:hover{background:rgba(255,255,255,.09);border-color:rgba(232,168,48,.3);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.pcard.star{border-color:rgba(232,168,48,.4);background:rgba(232,168,48,.06)}
+.pcard-badge{background:linear-gradient(135deg,var(--amber),var(--amber3));color:var(--ink);font-size:10px;font-weight:800;padding:7px 18px;letter-spacing:1px;text-transform:uppercase}
+.pcard-img{height:200px;overflow:hidden;position:relative}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.pcard:hover .pcard-img img{transform:scale(1.08)}
+.pcard-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.4))}
+.pcard-body{padding:22px;flex:1;display:flex;flex-direction:column}
+.pcard-name{font-family:var(--ff);font-size:21px;font-weight:900;color:#fff;margin-bottom:3px}
+.pcard-dur{color:var(--amber);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.pcard-cities{color:rgba(255,255,255,.4);font-size:12.5px;margin-bottom:14px;line-height:1.5}
+.pcard-price{margin-bottom:14px}
+.pcard-usd{font-family:var(--ff);font-size:28px;font-weight:900;color:var(--amber)}
+.pcard-lkr{font-size:12px;color:rgba(255,255,255,.38);margin-top:2px}
+.pcard-feats{list-style:none;margin-bottom:18px;flex:1}
+.pcard-feats li{color:rgba(255,255,255,.55);font-size:12.5px;padding:4px 0;display:flex;align-items:center;gap:8px}
+.pcard-feats li::before{content:'✓';color:var(--amber);font-weight:900;font-size:11px;flex-shrink:0}
+.btn-book{width:100%;padding:12px;background:linear-gradient(135deg,var(--amber),var(--amber3));color:var(--ink);border:none;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;transition:.3s;margin-top:auto;font-family:var(--fb)}
+.btn-book:hover{opacity:.85;transform:translateY(-1px)}
+
+/* ─── EXPERIENCES ─── */
+.exp-sec{background:var(--cream)}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ecard{border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);transition:.4s;cursor:pointer;background:#fff}
+.ecard:hover{transform:translateY(-9px);box-shadow:0 22px 50px rgba(0,0,0,.14)}
+.ecard-img{height:200px;overflow:hidden}
+.ecard-img img{width:100%;height:100%;object-fit:cover;transition:.55s}
+.ecard:hover .ecard-img img{transform:scale(1.1)}
+.ecard-body{padding:22px}
+.ecard-icon{font-size:24px;margin-bottom:8px;display:block}
+.ecard-name{font-family:var(--ff);font-size:19px;font-weight:900;color:var(--ink);margin-bottom:4px}
+.ecard-count{color:var(--amber);font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px}
+.ecard-desc{color:var(--mid);font-size:13px;line-height:1.65}
+.ecard-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.etag{background:var(--cream2);color:var(--ink2);font-size:10.5px;padding:3px 9px;border-radius:8px;font-weight:500}
+
+/* ─── ITINERARY ─── */
+.itin-sec{background:var(--ink)}
+.itin-tabs{display:flex;justify-content:center;gap:10px;margin-bottom:46px;flex-wrap:wrap}
+.itab{padding:10px 24px;border-radius:8px;border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);background:transparent;font-size:13px;font-weight:600;cursor:pointer;transition:.3s;font-family:var(--fb)}
+.itab.on{border-color:var(--amber);color:var(--amber);background:rgba(232,168,48,.08)}
+.itin-layout{display:grid;grid-template-columns:270px 1fr;gap:32px;max-width:1040px;margin:0 auto}
+.itin-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:26px}
+.ip-name{font-family:var(--ff);font-size:20px;color:#fff;font-weight:900;margin-bottom:3px}
+.ip-dur{color:var(--amber);font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:18px}
+.ip-pricebox{background:rgba(232,168,48,.1);border:1px solid rgba(232,168,48,.2);border-radius:12px;padding:16px;text-align:center;margin-bottom:18px}
+.ip-usd{font-family:var(--ff);font-size:30px;font-weight:900;color:var(--amber)}
+.ip-lkr{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px}
+.ip-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px;color:rgba(255,255,255,.58)}
+.ip-row:last-of-type{border-bottom:none}
+.ip-icon{color:var(--amber);font-size:13px;flex-shrink:0}
+.itin-days{display:flex;flex-direction:column;gap:14px}
+.day-row{display:flex;gap:15px;align-items:flex-start}
+.day-num-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.day-circle{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--amber),var(--amber3));display:flex;align-items:center;justify-content:center;font-family:var(--ff);font-size:15px;font-weight:900;color:var(--ink)}
+.day-connector{flex:1;width:2px;margin:5px auto 0;background:linear-gradient(to bottom,rgba(232,168,48,.4),transparent)}
+.day-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;flex:1;transition:.3s}
+.day-box:hover{background:rgba(255,255,255,.09);border-color:rgba(232,168,48,.2)}
+.day-title{font-weight:700;font-size:14.5px;color:#fff;margin-bottom:4px}
+.day-text{color:rgba(255,255,255,.52);font-size:12.5px;line-height:1.7}
+.day-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.dchip{background:rgba(232,168,48,.1);border:1px solid rgba(232,168,48,.2);color:var(--amber);font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600}
+
+/* ─── PLANNER ─── */
+.planner-sec{background:linear-gradient(140deg,#0A1628 0%,#0F2238 60%,#0C1E35 100%)}
+.planner-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;max-width:1040px;margin:0 auto}
+.pform{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:36px}
+.fg{margin-bottom:22px}
+.fl{display:block;color:rgba(255,255,255,.65);font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:9px}
+.fc{width:100%;padding:13px 16px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-size:14px;font-family:var(--fb);outline:none;transition:.3s;-webkit-appearance:none}
+.fc:focus{border-color:var(--amber);background:rgba(255,255,255,.1)}
+.fc option{background:#0F2238;color:#fff}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.ci{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.09);border-radius:10px;padding:11px 13px;cursor:pointer;transition:.3s}
+.ci:hover,.ci.on{border-color:rgba(232,168,48,.5);background:rgba(232,168,48,.08)}
+.ck{width:17px;height:17px;border-radius:4px;border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:.3s;flex-shrink:0}
+.ci.on .ck{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.ce{font-size:16px}.ct{color:rgba(255,255,255,.68);font-size:12.5px}
+/* summary */
+.sum{border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.sum-header{background:linear-gradient(135deg,var(--sage),var(--sage2));padding:26px;color:#fff}
+.sum-title{font-family:var(--ff);font-size:22px;font-weight:900;margin-bottom:3px}
+.sum-sub{font-size:11px;color:rgba(255,255,255,.55)}
+.sum-body{background:#fff;padding:22px}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px}
+.srow:last-child{border-bottom:none}
+.slbl{color:var(--mid)}
+.sval{font-weight:700;color:var(--ink)}
+.sum-footer{background:var(--cream2);padding:18px 22px;display:flex;justify-content:space-between;align-items:flex-end}
+.sf-lbl{font-size:13px;font-weight:700;color:var(--ink)}
+.sf-usd{font-family:var(--ff);font-size:32px;font-weight:900;color:var(--amber)}
+.sf-lkr{font-size:12px;color:var(--mid);text-align:right;margin-top:2px}
+.btn-plan{width:100%;padding:17px;background:linear-gradient(135deg,var(--amber),var(--amber3));color:var(--ink);border:none;font-weight:800;font-size:15px;cursor:pointer;transition:.3s;font-family:var(--fb)}
+.btn-plan:hover{opacity:.85}
+.disc{display:none;background:rgba(22,101,52,.1);border-radius:8px;padding:7px 12px;margin-top:4px}
+.disc-txt{color:#166534;font-size:12.5px;font-weight:700}
+
+/* ─── WHY ─── */
+.why-sec{background:var(--cream2)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.wcard{background:#fff;border-radius:18px;padding:32px 22px;text-align:center;box-shadow:0 3px 18px rgba(0,0,0,.07);transition:.35s}
+.wcard:hover{transform:translateY(-7px);box-shadow:0 18px 44px rgba(0,0,0,.12)}
+.wcard-img{width:70px;height:70px;border-radius:50%;overflow:hidden;margin:0 auto 16px;border:3px solid var(--amber)}
+.wcard-img img{width:100%;height:100%;object-fit:cover}
+.wcard-name{font-family:var(--ff);font-size:18px;font-weight:900;color:var(--ink);margin-bottom:8px}
+.wcard-desc{color:var(--mid);font-size:13px;line-height:1.7}
+
+/* ─── COMING SOON ─── */
+.cs-sec{background:var(--ink2)}
+.cs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px}
+.cscard{border-radius:18px;overflow:hidden}
+.cscard-img{height:180px;overflow:hidden;position:relative}
+.cscard-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.7)}
+.cscard-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 60%)}
+.cscard-flag{position:absolute;top:12px;right:12px;font-size:26px;z-index:1}
+.cscard-body{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-top:none;padding:20px}
+.cscard-name{font-family:var(--ff);font-size:20px;font-weight:900;color:#fff;margin-bottom:4px}
+.cscard-tag{color:var(--amber);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.cscard-desc{color:rgba(255,255,255,.45);font-size:12.5px;line-height:1.6;margin-bottom:14px}
+.csinput-row{display:flex;gap:7px}
+.csinput{flex:1;padding:9px 12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#fff;font-size:12px;font-family:var(--fb);outline:none}
+.csinput::placeholder{color:rgba(255,255,255,.3)}
+.csbtn{background:var(--amber);color:var(--ink);border:none;border-radius:7px;padding:9px 14px;font-size:11px;font-weight:800;cursor:pointer;transition:.3s;font-family:var(--fb);white-space:nowrap}
+.csbtn:hover{background:var(--amber2)}
+
+/* ─── GALLERY ─── */
+.gallery-sec{background:var(--cream);padding:90px 5%}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 220px;gap:14px}
+.gitem{border-radius:16px;overflow:hidden;cursor:pointer}
+.gitem img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gitem:hover img{transform:scale(1.07)}
+.gitem.tall{grid-row:span 2}
+.gitem.wide{grid-column:span 2}
+
+/* ─── TESTIMONIALS ─── */
+.testi-sec{background:var(--ink)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;transition:.3s}
+.tcard:hover{background:rgba(255,255,255,.09);border-color:rgba(232,168,48,.2);transform:translateY(-4px)}
+.tstars{color:var(--amber);font-size:13px;margin-bottom:13px;letter-spacing:2px}
+.ttext{color:rgba(255,255,255,.72);font-size:14px;line-height:1.8;font-style:italic;margin-bottom:18px}
+.tauthor{display:flex;align-items:center;gap:12px}
+.tavatar{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--amber)}
+.tavatar img{width:100%;height:100%;object-fit:cover}
+.tname{font-weight:700;color:#fff;font-size:14px}
+.tpkg{font-size:11.5px;color:rgba(255,255,255,.38)}
+
+/* ─── CONTACT ─── */
+.contact-sec{background:var(--cream2)}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:960px;margin:0 auto}
+.cinfo h3{font-family:var(--ff);font-size:28px;font-weight:900;color:var(--ink);margin-bottom:14px}
+.cinfo p{color:var(--mid);font-size:15px;line-height:1.75;margin-bottom:28px}
+.crow{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid rgba(0,0,0,.07)}
+.crow:last-child{border-bottom:none}
+.cicon{width:42px;height:42px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.clbl{font-size:10.5px;font-weight:700;letter-spacing:.5px;color:var(--light);text-transform:uppercase;margin-bottom:2px}
+.cval{font-size:14px;color:var(--ink2);font-weight:500}
+.cform{background:#fff;border-radius:20px;padding:36px;box-shadow:0 8px 40px rgba(0,0,0,.09)}
+.cform-title{font-family:var(--ff);font-size:24px;font-weight:900;color:var(--ink);margin-bottom:22px}
+.cfg{margin-bottom:17px}
+.cfl{display:block;font-size:10.5px;font-weight:700;color:var(--ink);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.cfi{width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,.1);border-radius:9px;font-size:14px;font-family:var(--fb);outline:none;transition:.3s;color:var(--ink);background:var(--cream);-webkit-appearance:none}
+.cfi:focus{border-color:var(--amber);background:#fff}
+textarea.cfi{resize:vertical;min-height:90px}
+.btn-contact{width:100%;padding:14px;background:linear-gradient(135deg,var(--ink),var(--ink2));color:#fff;border:none;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;transition:.3s;font-family:var(--fb)}
+.btn-contact:hover{background:linear-gradient(135deg,var(--amber),var(--amber3));color:var(--ink)}
+
+/* ─── FOOTER ─── */
+footer{background:#050D1A;padding:60px 5% 28px}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.fbrand p{color:rgba(255,255,255,.4);font-size:13px;line-height:1.75;margin-top:14px}
+.fcol h4{color:rgba(255,255,255,.7);font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:9px}
+.fcol a{color:rgba(255,255,255,.38);font-size:13px;text-decoration:none;transition:.2s}
+.fcol a:hover{color:var(--amber)}
+.fdiv{border:none;border-top:1px solid rgba(255,255,255,.06);margin-bottom:22px}
+.fbot{display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,.25);font-size:11.5px}
+.fsoc{display:flex;gap:9px}
+.fs{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;transition:.3s;text-decoration:none;color:rgba(255,255,255,.4)}
+.fs:hover{background:var(--amber);color:var(--ink)}
+
+/* ─── FLOAT WA ─── */
+.wa{position:fixed;bottom:28px;right:28px;z-index:998;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:0 8px 24px rgba(37,211,102,.45);cursor:pointer;transition:.3s;text-decoration:none}
+.wa:hover{transform:scale(1.1)}
+
+/* ─── MODAL ─── */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center}
+.mbg.open{display:flex}
+.modal{background:#fff;border-radius:20px;max-width:490px;width:92%;padding:36px;position:relative;max-height:88vh;overflow-y:auto}
+.mx{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;color:var(--mid);cursor:pointer}
+.mtitle{font-family:var(--ff);font-size:26px;font-weight:900;color:var(--ink);margin-bottom:4px}
+.mpkg{color:var(--amber);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px}
+.mpbox{background:var(--cream2);border-radius:12px;padding:15px 18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.mpl{font-size:12px;color:var(--mid)}
+.mpu{font-family:var(--ff);font-size:26px;font-weight:900;color:var(--amber)}
+.mplkr{font-size:12px;color:var(--mid);text-align:right;margin-top:2px}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+  .dest-grid{grid-template-columns:1fr 1fr;}.pkg-grid{grid-template-columns:1fr 1fr}
+  .planner-layout{grid-template-columns:1fr}.itin-layout{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr 1fr}
+  .cs-grid{grid-template-columns:1fr 1fr}.tgrid{grid-template-columns:1fr}
+  .contact-layout{grid-template-columns:1fr}.ft{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gitem.tall,.gitem.wide{grid-column:auto;grid-row:auto}
+  .rm-row{flex-wrap:wrap;gap:30px}.rm-line{display:none}
+}
+@media(max-width:640px){
+  .dest-grid,.pkg-grid,.exp-grid,.why-grid,.cs-grid{grid-template-columns:1fr}
+  .nav-menu{display:none}.hero-btns{flex-direction:column}
+  .checks{grid-template-columns:1fr}.ft{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <img src="logo.jpeg" alt="Trip Zone Travels Logo" style="height: 48px; width: auto; border-radius: 8px; object-fit: contain;">
+      <div><span class="logo-name">Trip Zone Travels</span><span class="logo-sub">Asia's Finest Destinations</span></div>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#itinerary">Itineraries</a></li>
+      <li><a href="#planner">Custom Trip</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="cur-switch">
+        <button class="cs-btn active" onclick="setCur('USD')">USD</button>
+        <button class="cs-btn" onclick="setCur('LKR')">LKR</button>
+      </div>
+      <a class="nav-cta" href="#contact">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-img" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-chip"><div class="hero-chip-dot"></div><span>Stage 1 — Thailand Now Live</span></div>
+    <h1>Asia's Finest<br>Destinations,<br><em>One at a Time</em></h1>
+    <p>Sri Lanka's only phased Asia travel specialist. We master each country before opening the next. Thailand is live — Maldives, India, Malaysia & Singapore coming soon.</p>
+    <div class="hero-btns">
+      <a href="#packages" class="btn-amber">Explore Thailand Packages</a>
+      <a href="#destinations" class="btn-ghost">See All Destinations</a>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <a href="#packages" class="hb act"><span class="hb-flag">🇹🇭</span><div class="hb-info"><div class="hb-name">Thailand</div><div class="hb-status live">● Live Now</div></div><span style="color:var(--amber)">→</span></a>
+    <div class="hb dim"><span class="hb-flag">🇲🇻</span><div class="hb-info"><div class="hb-name">Maldives</div><div class="hb-status">Coming 2026</div></div></div>
+    <div class="hb dim"><span class="hb-flag">🇮🇳</span><div class="hb-info"><div class="hb-name">India</div><div class="hb-status">Coming 2026</div></div></div>
+    <div class="hb dim"><span class="hb-flag">🇲🇾</span><div class="hb-info"><div class="hb-name">Malaysia</div><div class="hb-status">Coming 2027</div></div></div>
+    <div class="hb dim"><span class="hb-flag">🇸🇬</span><div class="hb-info"><div class="hb-name">Singapore</div><div class="hb-status">Coming 2027</div></div></div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ── DEST PILLS ── -->
+<div class="dest-pills">
+  <div class="dp-inner">
+    <a class="dp on" href="#packages"><span class="dp-flag">🇹🇭</span><span class="dp-name">Thailand</span><span class="dp-tag tag-live">● Live</span></a>
+    <a class="dp" href="#coming-soon"><span class="dp-flag">🇲🇻</span><span class="dp-name">Maldives</span><span class="dp-tag tag-soon">2026</span></a>
+    <a class="dp" href="#coming-soon"><span class="dp-flag">🇮🇳</span><span class="dp-name">India</span><span class="dp-tag tag-soon">2026</span></a>
+    <a class="dp" href="#coming-soon"><span class="dp-flag">🇲🇾</span><span class="dp-name">Malaysia</span><span class="dp-tag tag-soon">2027</span></a>
+    <a class="dp" href="#coming-soon"><span class="dp-flag">🇸🇬</span><span class="dp-name">Singapore</span><span class="dp-tag tag-soon">2027</span></a>
+  </div>
+</div>
+
+<!-- ── 5 DESTINATIONS ── -->
+<section class="dest-section" id="destinations">
+  <div class="sec-head center">
+    <span class="lbl">Our Five Destinations</span>
+    <h2 class="h2">Asia Unlocked, One Country at a Time</h2>
+    <p class="desc">We open Asia methodically — mastering each destination before expanding. Thailand is live and bookable right now.</p>
+  </div>
+  <div class="dest-grid">
+    <div class="dcard" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">
+      <div class="dcard-img" style="background-image:url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80')"></div>
+      <div class="dcard-veil"></div>
+      <div class="dcard-top"><span class="dcard-flag">🇹🇭</span><span class="dpill live">● Live Now</span></div>
+      <div class="dcard-body">
+        <div class="dcard-stage">Stage 1 — 2025</div>
+        <div class="dcard-name">Thailand</div>
+        <div class="dcard-spots">Bangkok · Phuket · Chiang Mai · Koh Samui · Pattaya · Krabi</div>
+        <div style="color:var(--amber);font-size:12.5px;font-weight:700;margin-top:8px">7 packages available →</div>
+      </div>
+    </div>
+    <div class="dcard dim">
+      <div class="dcard-img" style="background-image:url('https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80')"></div>
+      <div class="dcard-veil"></div>
+      <div class="dcard-top"><span class="dcard-flag">🇲🇻</span><span class="dpill soon">Coming 2026</span></div>
+      <div class="dcard-body">
+        <div class="dcard-stage">Stage 2 — 2026</div>
+        <div class="dcard-name">Maldives</div>
+        <div class="dcard-spots">Malé · Ari Atoll · Baa Atoll · Overwater Villas · Diving</div>
+        <button class="dcard-notify" onclick="notify('Maldives')">🔔 Notify Me When Live</button>
+      </div>
+    </div>
+    <div class="dcard dim">
+      <div class="dcard-img" style="background-image:url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80')"></div>
+      <div class="dcard-veil"></div>
+      <div class="dcard-top"><span class="dcard-flag">🇮🇳</span><span class="dpill soon">Coming 2026</span></div>
+      <div class="dcard-body">
+        <div class="dcard-stage">Stage 3 — 2026</div>
+        <div class="dcard-name">India</div>
+        <div class="dcard-spots">Delhi · Agra · Rajasthan · Kerala Backwaters · Goa</div>
+        <button class="dcard-notify" onclick="notify('India')">🔔 Notify Me When Live</button>
+      </div>
+    </div>
+    <div class="dcard dim">
+      <div class="dcard-img" style="background-image:url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80')"></div>
+      <div class="dcard-veil"></div>
+      <div class="dcard-top"><span class="dcard-flag">🇲🇾</span><span class="dpill soon">Coming 2027</span></div>
+      <div class="dcard-body">
+        <div class="dcard-stage">Stage 4 — 2027</div>
+        <div class="dcard-name">Malaysia</div>
+        <div class="dcard-spots">Kuala Lumpur · Penang · Langkawi · Sabah · Petronas Towers</div>
+        <button class="dcard-notify" onclick="notify('Malaysia')">🔔 Notify Me When Live</button>
+      </div>
+    </div>
+    <div class="dcard dim">
+      <div class="dcard-img" style="background-image:url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=80')"></div>
+      <div class="dcard-veil"></div>
+      <div class="dcard-top"><span class="dcard-flag">🇸🇬</span><span class="dpill soon">Coming 2027</span></div>
+      <div class="dcard-body">
+        <div class="dcard-stage">Stage 5 — 2027</div>
+        <div class="dcard-name">Singapore</div>
+        <div class="dcard-spots">Marina Bay · Sentosa · Gardens by the Bay · Universal Studios</div>
+        <button class="dcard-notify" onclick="notify('Singapore')">🔔 Notify Me When Live</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ROADMAP ── -->
+<div class="roadmap">
+  <div class="sec-head center">
+    <span class="lbl" style="color:var(--amber)">Our Journey</span>
+    <h2 class="h2 white">Destination Launch Roadmap</h2>
+    <p class="desc light">Five iconic Asian countries. One destination mastered at a time.</p>
+  </div>
+  <div class="rm-row">
+    <div class="rm-item"><div class="rm-circle live">🇹🇭</div><div class="rm-line"></div><div class="rm-name">Thailand</div><div class="rm-yr">2025</div><div class="rm-pill live">● Active</div></div>
+    <div class="rm-item"><div class="rm-circle plan">🇲🇻</div><div class="rm-line"></div><div class="rm-name">Maldives</div><div class="rm-yr">2026</div><div class="rm-pill plan">Planned</div></div>
+    <div class="rm-item"><div class="rm-circle plan">🇮🇳</div><div class="rm-line"></div><div class="rm-name">India</div><div class="rm-yr">2026</div><div class="rm-pill plan">Planned</div></div>
+    <div class="rm-item"><div class="rm-circle plan">🇲🇾</div><div class="rm-line"></div><div class="rm-name">Malaysia</div><div class="rm-yr">2027</div><div class="rm-pill plan">Planned</div></div>
+    <div class="rm-item"><div class="rm-circle plan">🇸🇬</div><div class="rm-name">Singapore</div><div class="rm-yr">2027</div><div class="rm-pill plan">Planned</div></div>
+  </div>
+</div>
+
+<!-- ── PACKAGES ── -->
+<section class="packages-sec" id="packages">
+  <div class="sec-head center">
+    <span class="lbl">🇹🇭 Stage 1 — Thailand Packages</span>
+    <h2 class="h2 white">Choose Your Thailand Journey</h2>
+    <p class="desc light">Transparent pricing in USD & LKR. Hotel, breakfast, tours & transfers all included.</p>
+  </div>
+  <div class="pkg-filter">
+    <button class="pfbtn on" onclick="filterPkg('all',this)">All Packages</button>
+    <button class="pfbtn" onclick="filterPkg('short',this)">Short Stay (4–5N)</button>
+    <button class="pfbtn" onclick="filterPkg('mid',this)">Explorer (6–7N)</button>
+    <button class="pfbtn" onclick="filterPkg('long',this)">Ultimate (8N+)</button>
+  </div>
+  <div class="pkg-grid" id="pkgGrid">
+    <div class="pcard" data-t="short">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=500&q=80" alt="Bangkok"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Bangkok Essentials</div><div class="pcard-dur">4 Nights / 5 Days</div>
+        <div class="pcard-cities">📍 Bangkok</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="550" data-lkr="176000">USD 550</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>Grand Palace & Temples</li><li>Chinatown street food walk</li><li>Siam & MBK shopping</li><li>Chao Phraya dinner cruise</li></ul>
+        <button class="btn-book" onclick="openModal('Bangkok Essentials','550','176,000')">Book Package</button>
+      </div>
+    </div>
+    <div class="pcard" data-t="short">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1619546952812-520e98064a52?w=500&q=80" alt="Pattaya"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Bangkok + Pattaya</div><div class="pcard-dur">5 Nights / 6 Days</div>
+        <div class="pcard-cities">📍 Bangkok · Pattaya</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="720" data-lkr="230400">USD 720</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>Bangkok temples & markets</li><li>Coral Island boat trip</li><li>Nong Nooch Tropical Garden</li><li>Pattaya nightlife experience</li></ul>
+        <button class="btn-book" onclick="openModal('Bangkok + Pattaya','720','230,400')">Book Package</button>
+      </div>
+    </div>
+    <div class="pcard star" data-t="short">
+      <div class="pcard-badge">⭐ Most Popular</div>
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=500&q=80" alt="Phuket"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Phuket Paradise</div><div class="pcard-dur">5 Nights / 6 Days</div>
+        <div class="pcard-cities">📍 Phuket · Phi Phi Islands</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="800" data-lkr="256000">USD 800</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>Phi Phi Islands speed boat tour</li><li>James Bond Island & kayaking</li><li>Big Buddha & Wat Chalong</li><li>Phuket FantaSea show</li></ul>
+        <button class="btn-book" onclick="openModal('Phuket Paradise','800','256,000')">Book Package</button>
+      </div>
+    </div>
+    <div class="pcard" data-t="short">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80" alt="Koh Samui"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Koh Samui Retreat</div><div class="pcard-dur">5 Nights / 6 Days</div>
+        <div class="pcard-cities">📍 Bangkok · Koh Samui</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="850" data-lkr="272000">USD 850</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>Ang Thong Marine Park</li><li>Chaweng Beach leisure</li><li>Fisherman's Village dinner</li><li>Bangkok temples & markets</li></ul>
+        <button class="btn-book" onclick="openModal('Koh Samui Retreat','850','272,000')">Book Package</button>
+      </div>
+    </div>
+    <div class="pcard" data-t="mid">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=500&q=80" alt="Chiang Mai"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Northern Discovery</div><div class="pcard-dur">6 Nights / 7 Days</div>
+        <div class="pcard-cities">📍 Bangkok · Chiang Mai · Chiang Rai</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="950" data-lkr="304000">USD 950</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>Elephant Sanctuary visit</li><li>Doi Suthep & White Temple</li><li>Thai Cooking Class</li><li>Golden Triangle border</li></ul>
+        <button class="btn-book" onclick="openModal('Northern Discovery','950','304,000')">Book Package</button>
+      </div>
+    </div>
+    <div class="pcard" data-t="long">
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=500&q=80" alt="Grand Thailand"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Grand Thailand</div><div class="pcard-dur">8 Nights / 9 Days</div>
+        <div class="pcard-cities">📍 Bangkok · Phuket · Samui</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="1350" data-lkr="432000">USD 1,350</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>Grand Palace & Temples</li><li>Phi Phi Islands Tour</li><li>Koh Samui Beaches</li><li>VIP Transfers</li></ul>
+        <button class="btn-book" onclick="openModal('Grand Thailand','1,350','432,000')">Book Package</button>
+      </div>
+    </div>
+    <div class="pcard star" data-t="long">
+      <div class="pcard-badge">👑 Flagship Package</div>
+      <div class="pcard-img"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500&q=80" alt="Thailand Ultimate"><div class="pcard-img-overlay"></div></div>
+      <div class="pcard-body">
+        <div class="pcard-name">Ultimate Thailand</div><div class="pcard-dur">10 Nights / 11 Days</div>
+        <div class="pcard-cities">📍 Bangkok · Chiang Mai · Chiang Rai · Phuket</div>
+        <div class="pcard-price"><div class="pcard-usd" data-usd="1750" data-lkr="560000">USD 1,750</div><div class="pcard-lkr">per person · twin sharing</div></div>
+        <ul class="pcard-feats"><li>4 destinations · VIP transfers</li><li>All UNESCO heritage sites</li><li>Phi Phi & Phang Nga Bay tours</li><li>Elephant Sanctuary + Cooking Class</li></ul>
+        <button class="btn-book" onclick="openModal('Ultimate Thailand','1,750','560,000')">Book Package</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE CATEGORIES ── -->
+<section class="exp-sec" id="experiences">
+  <div class="sec-head center">
+    <span class="lbl">Thailand Experiences</span>
+    <h2 class="h2">Explore by Category</h2>
+    <p class="desc">Four iconic experience pillars — mix and match to build your perfect Thailand story.</p>
+  </div>
+  <div class="exp-grid">
+    <div class="ecard">
+      <div class="ecard-img"><img src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=500&q=80" alt="Bangkok City"></div>
+      <div class="ecard-body"><span class="ecard-icon">🏙</span><div class="ecard-name">Bangkok City Tour</div><div class="ecard-count">8 Key Highlights</div><div class="ecard-desc">Ancient temples meet ultramodern skylines. Night markets, river cruises, and rooftop bars.</div><div class="ecard-tags"><span class="etag">Grand Palace</span><span class="etag">Chatuchak</span><span class="etag">Chinatown</span><span class="etag">Dinner Cruise</span></div></div>
+    </div>
+    <div class="ecard">
+      <div class="ecard-img"><img src="https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=500&q=80" alt="Beach"></div>
+      <div class="ecard-body"><span class="ecard-icon">🏖</span><div class="ecard-name">Beach & Islands</div><div class="ecard-count">7 Destinations</div><div class="ecard-desc">Crystal Andaman waters, white sand beaches, and stunning island-hops across paradise.</div><div class="ecard-tags"><span class="etag">Phuket</span><span class="etag">Phi Phi</span><span class="etag">Koh Samui</span><span class="etag">Krabi</span></div></div>
+    </div>
+    <div class="ecard">
+      <div class="ecard-img"><img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=500&q=80" alt="Shopping"></div>
+      <div class="ecard-body"><span class="ecard-icon">🛍</span><div class="ecard-name">Shopping Paradise</div><div class="ecard-count">8 Markets & Malls</div><div class="ecard-desc">Luxury malls to sprawling street markets — Thailand is a world-class shopper's dream.</div><div class="ecard-tags"><span class="etag">Siam Paragon</span><span class="etag">MBK</span><span class="etag">ICON SIAM</span><span class="etag">Chatuchak</span></div></div>
+    </div>
+    <div class="ecard">
+      <div class="ecard-img"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=500&q=80" alt="Temples"></div>
+      <div class="ecard-body"><span class="ecard-icon">⛩</span><div class="ecard-name">Temple & Culture</div><div class="ecard-count">8 Sacred Sites</div><div class="ecard-desc">700 years of Buddhist heritage — golden stupas, ancient ruins, and mountain sanctuaries.</div><div class="ecard-tags"><span class="etag">Wat Pho</span><span class="etag">Doi Suthep</span><span class="etag">White Temple</span><span class="etag">Ayutthaya</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHOTO GALLERY ── -->
+<section class="gallery-sec">
+  <div class="sec-head center">
+    <span class="lbl">Thailand in Pictures</span>
+    <h2 class="h2">See the Beauty Awaiting You</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gitem tall"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&q=85" alt="Thailand temple" style="height:100%"></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=85" alt="Phi Phi Islands"></div>
+    <div class="gitem wide"><img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800&q=85" alt="Bangkok Skyline"></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=600&q=85" alt="Elephant"></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=600&q=85" alt="White Temple Chiang Rai"></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600&q=85" alt="Thai food"></div>
+  </div>
+</section>
+
+<!-- ── ITINERARY ── -->
+<section class="itin-sec" id="itinerary">
+  <div class="sec-head center">
+    <span class="lbl">Day-by-Day</span>
+    <h2 class="h2 white">Travel Itineraries</h2>
+    <p class="desc light">Every day planned to perfection. See exactly what your Thailand experience looks like.</p>
+  </div>
+  <div class="itin-tabs">
+    <button class="itab on" onclick="loadItin('bkk',this)">Bangkok Essentials</button>
+    <button class="itab" onclick="loadItin('pkt',this)">Phuket Paradise</button>
+    <button class="itab" onclick="loadItin('north',this)">Northern Discovery</button>
+    <button class="itab" onclick="loadItin('ult',this)">Ultimate Thailand</button>
+  </div>
+  <div class="itin-layout" id="itinLayout"></div>
+</section>
+
+<!-- ── CUSTOM PLANNER ── -->
+<section class="planner-sec" id="planner">
+  <div class="sec-head center">
+    <span class="lbl">Personalize Your Trip</span>
+    <h2 class="h2 white">Build Your Custom Thailand Journey</h2>
+    <p class="desc light">Choose your travelers, hotel tier & experiences — get an instant price in USD & LKR.</p>
+  </div>
+  <div class="planner-layout">
+    <div class="pform">
+      <div class="fg"><label class="fl">Travel Date</label><input type="date" class="fc" id="tDate"></div>
+      <div class="fg"><label class="fl">Number of Travelers</label>
+        <select class="fc" id="travelers" onchange="calcCost()">
+          <option value="2">2 Travelers (Couple / Friends)</option>
+          <option value="1">1 Traveler (Solo +USD 20/night supplement)</option>
+          <option value="3">3 Travelers</option>
+          <option value="4">4 Travelers (Family)</option>
+          <option value="5">5+ Travelers (Group — 5% discount!)</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Trip Duration</label>
+        <select class="fc" id="duration" onchange="calcCost()">
+          <option value="5" data-base="550">4 Nights / 5 Days</option>
+          <option value="6" data-base="720">5 Nights / 6 Days</option>
+          <option value="7" data-base="950">6 Nights / 7 Days</option>
+          <option value="9" data-base="1350">8 Nights / 9 Days</option>
+          <option value="11" data-base="1750">10 Nights / 11 Days</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Accommodation</label>
+        <select class="fc" id="hotel" onchange="calcCost()">
+          <option value="0">3-Star Standard Hotel</option>
+          <option value="30">4-Star Deluxe Hotel (+USD 30/night)</option>
+          <option value="80">5-Star Luxury Resort (+USD 80/night)</option>
+          <option value="120">Private Beach Villa (+USD 120/night)</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Select Experiences</label>
+        <div class="checks">
+          <div class="ci" onclick="toggleAddon(this)" data-p="45"><div class="ck">✓</div><span class="ce">🏯</span><span class="ct">Temple Tours</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="90"><div class="ck">✓</div><span class="ce">🏝</span><span class="ct">Island Hopping</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="75"><div class="ck">✓</div><span class="ce">🐘</span><span class="ct">Elephant Sanctuary</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="45"><div class="ck">✓</div><span class="ce">🍜</span><span class="ct">Cooking Class</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="40"><div class="ck">✓</div><span class="ce">🚢</span><span class="ct">Dinner Cruise</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="30"><div class="ck">✓</div><span class="ce">💆</span><span class="ct">Spa & Massage</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="55"><div class="ck">✓</div><span class="ce">🏛</span><span class="ct">Ayutthaya Trip</span></div>
+          <div class="ci" onclick="toggleAddon(this)" data-p="25"><div class="ck">✓</div><span class="ce">🛡</span><span class="ct">Travel Insurance</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="sum">
+        <div class="sum-header"><div class="sum-title">Your Custom Package</div><div class="sum-sub">Live estimate · USD & LKR</div></div>
+        <div class="sum-body">
+          <div class="srow"><span class="slbl">Base Package</span><span class="sval" id="sBase">USD 550</span></div>
+          <div class="srow"><span class="slbl">Hotel Upgrade</span><span class="sval" id="sHotel">USD 0</span></div>
+          <div class="srow"><span class="slbl">Add-Ons</span><span class="sval" id="sAddons">USD 0</span></div>
+          <div class="srow"><span class="slbl">Travelers</span><span class="sval" id="sTrav">2 persons</span></div>
+          <div class="disc" id="discDiv"><div class="disc-txt">🎉 Group Discount Applied: −5%</div></div>
+        </div>
+        <div class="sum-footer">
+          <div><div class="sf-lbl">Total Estimate</div><div class="sf-lkr" id="sfLKR">LKR 352,000</div></div>
+          <div class="sf-usd" id="sfUSD">USD 1,100</div>
+        </div>
+        <button class="btn-plan" onclick="openPlannerModal()">Get My Custom Quote →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section class="why-sec">
+  <div class="sec-head center">
+    <span class="lbl">Why Trip Zone Travels</span>
+    <h2 class="h2">The Difference We Make</h2>
+    <p class="desc">Not a generalist — an Asia specialist. One destination, fully mastered, at a time.</p>
+  </div>
+  <div class="why-grid">
+    <div class="wcard"><div class="wcard-img"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=200&q=80" alt="Specialist"></div><div class="wcard-name">Destination Specialists</div><div class="wcard-desc">We master each destination before selling it — deep supplier relationships, insider knowledge, better value.</div></div>
+    <div class="wcard"><div class="wcard-img"><img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=200&q=80" alt="Pricing"></div><div class="wcard-name">Transparent Dual Pricing</div><div class="wcard-desc">Every package shows both USD and LKR — real prices with zero hidden fees or surprises.</div></div>
+    <div class="wcard"><div class="wcard-img"><img src="https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=200&q=80" alt="Custom"></div><div class="wcard-name">Fully Customizable</div><div class="wcard-desc">Every element tailored to you — from accommodation tier to activities and travel dates.</div></div>
+    <div class="wcard"><div class="wcard-img"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=200&q=80" alt="Support"></div><div class="wcard-name">24/7 WhatsApp Support</div><div class="wcard-desc">Our team is with you throughout your trip — instant help wherever you are in Asia.</div></div>
+  </div>
+</section>
+
+<!-- ── COMING SOON ── -->
+<section class="cs-sec" id="coming-soon">
+  <div class="sec-head center">
+    <span class="lbl" style="color:var(--amber)">On the Horizon</span>
+    <h2 class="h2 white">Coming Soon — Asia Awaits</h2>
+    <p class="desc light">Sign up to be first when each destination launches.</p>
+  </div>
+  <div class="cs-grid">
+    <div class="cscard">
+      <div class="cscard-img"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=500&q=80" alt="Maldives"><div class="cscard-img-overlay"></div><span class="cscard-flag">🇲🇻</span></div>
+      <div class="cscard-body"><div class="cscard-name">Maldives</div><div class="cscard-tag">Stage 2 — 2026</div><div class="cscard-desc">Overwater villas, diving in crystal lagoons, and island-hop across paradise atolls.</div><div class="csinput-row"><input class="csinput" type="email" placeholder="your@email.com"><button class="csbtn" onclick="signUp(this,'Maldives')">Notify Me</button></div></div>
+    </div>
+    <div class="cscard">
+      <div class="cscard-img"><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=500&q=80" alt="India"><div class="cscard-img-overlay"></div><span class="cscard-flag">🇮🇳</span></div>
+      <div class="cscard-body"><div class="cscard-name">India</div><div class="cscard-tag">Stage 3 — 2026</div><div class="cscard-desc">Golden Triangle, Kerala backwaters, Rajasthan forts, and Goa beaches.</div><div class="csinput-row"><input class="csinput" type="email" placeholder="your@email.com"><button class="csbtn" onclick="signUp(this,'India')">Notify Me</button></div></div>
+    </div>
+    <div class="cscard">
+      <div class="cscard-img"><img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=500&q=80" alt="Malaysia"><div class="cscard-img-overlay"></div><span class="cscard-flag">🇲🇾</span></div>
+      <div class="cscard-body"><div class="cscard-name">Malaysia</div><div class="cscard-tag">Stage 4 — 2027</div><div class="cscard-desc">KL's iconic skyline, colonial Penang, Langkawi beaches, and Sabah eco-adventures.</div><div class="csinput-row"><input class="csinput" type="email" placeholder="your@email.com"><button class="csbtn" onclick="signUp(this,'Malaysia')">Notify Me</button></div></div>
+    </div>
+    <div class="cscard">
+      <div class="cscard-img"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=500&q=80" alt="Singapore"><div class="cscard-img-overlay"></div><span class="cscard-flag">🇸🇬</span></div>
+      <div class="cscard-body"><div class="cscard-name">Singapore</div><div class="cscard-tag">Stage 5 — 2027</div><div class="cscard-desc">Marina Bay Sands, Sentosa Island, Gardens by the Bay, and Universal Studios.</div><div class="csinput-row"><input class="csinput" type="email" placeholder="your@email.com"><button class="csbtn" onclick="signUp(this,'Singapore')">Notify Me</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi-sec">
+  <div class="sec-head center">
+    <span class="lbl" style="color:var(--amber)">Happy Travelers</span>
+    <h2 class="h2 white">Real Stories, Real Smiles</h2>
+    <p class="desc light">Sri Lankan travelers who discovered Asia with Trip Zone Travels.</p>
+  </div>
+  <div class="tgrid">
+    <div class="tcard">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"The Phuket Paradise package was beyond every expectation. Phi Phi Islands day was pure magic — every detail handled flawlessly. Already signed up for the Maldives launch!"</p>
+      <div class="tauthor"><div class="tavatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Kavinda"></div><div><div class="tname">Kavinda Perera</div><div class="tpkg">Colombo — Phuket Paradise</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Our honeymoon with the Ultimate Thailand package was absolutely perfect. Four cities, incredible hotels, every moment curated. The USD/LKR pricing made budgeting so easy!"</p>
+      <div class="tauthor"><div class="tavatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sachini"></div><div><div class="tname">Sachini & Ranil</div><div class="tpkg">Kandy — Ultimate Thailand</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Our group of 8 got a great discount and the WhatsApp support during the trip was outstanding. Trip Zone clearly knows Thailand inside out. Already planning our next trip!"</p>
+      <div class="tauthor"><div class="tavatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Dilshan"></div><div><div class="tname">Dilshan & Friends</div><div class="tpkg">Galle — Bangkok + Pattaya</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-sec" id="contact">
+  <div class="sec-head center">
+    <span class="lbl">Get In Touch</span>
+    <h2 class="h2">Start Your Asia Journey</h2>
+    <p class="desc">Ready to book Thailand — or want early access to the next destination? Let's talk.</p>
+  </div>
+  <div class="contact-layout">
+    <div class="cinfo">
+      <h3>Let's Plan Together</h3>
+      <p>Our Thailand experts are ready to craft your perfect itinerary — whether you pick a ready-made package or build something fully bespoke. Sign up for early access to future destinations.</p>
+      <div class="crow"><div class="cicon">📞</div><div><div class="clbl">Phone / WhatsApp</div><div class="cval">+94 76 740 6971</div></div></div>
+      <div class="crow"><div class="cicon">📧</div><div><div class="clbl">Email</div><div class="cval">tripzonetravelslk@gmail.com</div></div></div>
+      <div class="crow"><div class="cicon">📍</div><div><div class="clbl">Office</div><div class="cval">Colombo, Sri Lanka</div></div></div>
+      <div class="crow"><div class="cicon">🕐</div><div><div class="clbl">Hours</div><div class="cval">Mon–Sat 9AM–7PM · WhatsApp 24/7</div></div></div>
+    </div>
+    <div class="cform">
+      <div class="cform-title">Send Us a Message</div>
+      <div class="cfg"><label class="cfl">Full Name</label><input class="cfi" type="text" placeholder="Your full name"></div>
+      <div class="cfg"><label class="cfl">WhatsApp Number</label><input class="cfi" type="tel" placeholder="+94 76 740 6971"></div>
+      <div class="cfg"><label class="cfl">Interested In</label>
+        <select class="cfi">
+          <option>🇹🇭 Thailand — Bangkok Essentials (USD 550)</option>
+          <option>🇹🇭 Thailand — Bangkok + Pattaya (USD 720)</option>
+          <option>🇹🇭 Thailand — Phuket Paradise (USD 800)</option>
+          <option>🇹🇭 Thailand — Northern Discovery (USD 950)</option>
+          <option>🇹🇭 Thailand — Grand Thailand (USD 1,350)</option>
+          <option>🇹🇭 Thailand — Ultimate Thailand (USD 1,750)</option>
+          <option>🇹🇭 Thailand — Custom Package</option>
+          <option>🇲🇻 Maldives — Notify Me When Live</option>
+          <option>🇮🇳 India — Notify Me When Live</option>
+          <option>🇲🇾 Malaysia — Notify Me When Live</option>
+          <option>🇸🇬 Singapore — Notify Me When Live</option>
+        </select>
+      </div>
+      <div class="cfg"><label class="cfl">Message</label><textarea class="cfi" placeholder="Travel dates, group size, special requests..."></textarea></div>
+      <button class="btn-contact" onclick="alert('Thank you! Our team will contact you within 2 hours on WhatsApp. 🙏✈')">Send Inquiry →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="ft">
+    <div class="fbrand">
+      <a class="logo" href="#"><img src="logo.jpeg" alt="Trip Zone Travels Logo" style="height: 48px; width: auto; border-radius: 8px; object-fit: contain;"><div><span class="logo-name">Trip Zone Travels</span><span class="logo-sub">Asia's Finest Destinations</span></div></a>
+      <p>Sri Lanka's phased Asia travel specialist. Thailand is live. Maldives, India, Malaysia & Singapore coming soon — one destination mastered at a time.</p>
+    </div>
+    <div class="fcol"><h4>Destinations</h4><ul>
+      <li><a href="#">🇹🇭 Thailand (Live)</a></li>
+      <li><a href="#">🇲🇻 Maldives (2026)</a></li>
+      <li><a href="#">🇮🇳 India (2026)</a></li>
+      <li><a href="#">🇲🇾 Malaysia (2027)</a></li>
+      <li><a href="#">🇸🇬 Singapore (2027)</a></li>
+    </ul></div>
+    <div class="fcol"><h4>Thailand</h4><ul>
+      <li><a href="#">Bangkok Essentials</a></li>
+      <li><a href="#">Phuket Paradise</a></li>
+      <li><a href="#">Northern Discovery</a></li>
+      <li><a href="#">Ultimate Thailand</a></li>
+      <li><a href="#">Custom Packages</a></li>
+    </ul></div>
+    <div class="fcol"><h4>Company</h4><ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Roadmap</a></li>
+      <li><a href="#">Testimonials</a></li>
+      <li><a href="#">Travel Blog</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul></div>
+  </div>
+  <hr class="fdiv">
+  <div class="fbot">
+    <span>© 2025 Trip Zone Travels · Colombo, Sri Lanka · All rights reserved</span>
+    <div class="fsoc">
+      <a class="fs" href="#">f</a><a class="fs" href="#">in</a><a class="fs" href="#">▶</a><a class="fs" href="#">📷</a>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/94767406971" target="_blank">💬</a>
+
+<!-- BOOKING MODAL -->
+<div class="mbg" id="modal">
+  <div class="modal">
+    <button class="mx" onclick="closeModal()">✕</button>
+    <div class="mtitle">Book Your Package</div>
+    <div class="mpkg" id="mPkg">—</div>
+    <div class="cfg"><label class="cfl">Full Name</label><input class="cfi" type="text" placeholder="Your full name"></div>
+    <div class="cfg"><label class="cfl">WhatsApp Number</label><input class="cfi" type="tel" placeholder="+94 76 740 6971"></div>
+    <div class="cfg"><label class="cfl">Travel Date</label><input class="cfi" type="date"></div>
+    <div class="cfg"><label class="cfl">Travelers</label><select class="cfi"><option>2 Travelers</option><option>1 Traveler</option><option>3 Travelers</option><option>4 Travelers</option><option>5+ Travelers</option></select></div>
+    <div class="mpbox"><div><div class="mpl">Package Price (per person)</div></div><div><div class="mpu" id="mUSD">USD 550</div><div class="mplkr" id="mLKR">LKR 176,000</div></div></div>
+    <button class="btn-contact" onclick="alert('Booking request sent! We will contact you on WhatsApp within 2 hours. 🙏✈')">Confirm Booking →</button>
+  </div>
+</div>
+
+<script>
+// ── HERO BG LOAD ──
+window.addEventListener('load',()=>{
+  const bg=document.getElementById('heroBg');
+  const img=new Image();
+  img.onload=()=>bg.classList.add('loaded');
+  img.src='https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=1800&q=85';
+});
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>70));
+
+// ── CURRENCY ──
+let curMode='USD';
+function setCur(c){
+  curMode=c;
+  document.querySelectorAll('.cs-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));
+  document.querySelectorAll('.pcard-usd').forEach(el=>{
+    const u=parseInt(el.dataset.usd),l=parseInt(el.dataset.lkr);
+    el.textContent=c==='LKR'?'LKR '+l.toLocaleString():'USD '+u.toLocaleString();
+  });
+}
+
+// ── PKG FILTER ──
+function filterPkg(t,btn){
+  document.querySelectorAll('.pfbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pcard').forEach(c=>c.style.display=(t==='all'||c.dataset.t===t)?'':'none');
+}
+
+// ── ITINERARY ──
+const ITINS={
+  bkk:{n:'Bangkok Essentials',d:'4 Nights / 5 Days',u:'USD 550',l:'LKR 176,000',ci:'Bangkok',ht:'3★ Central Bangkok Hotel',
+    days:[
+      {n:'01',t:'Arrival & Night Market',tx:'Arrive Suvarnabhumi Airport. VIP transfer to hotel. Evening: Asiatique Riverfront Night Market and welcome Thai dinner.',chips:['Night Market','River Views','Welcome Dinner']},
+      {n:'02',t:'Grand Temples of Bangkok',tx:'Grand Palace & Wat Phra Kaew. Longtail boat to Wat Arun (Temple of Dawn). Wat Pho — home of the giant Reclining Buddha. Evening: Chinatown street food walk.',chips:['Grand Palace','Wat Pho','Chinatown']},
+      {n:'03',t:'Shopping & River Cruise',tx:'Jim Thompson House cultural visit. Afternoon: Siam Paragon and MBK Center shopping spree. Evening: Chao Phraya dinner cruise with Bangkok skyline.',chips:['Shopping','Dinner Cruise','Jim Thompson']},
+      {n:'04',t:'Markets & Skyline',tx:'Chatuchak Weekend Market (world\'s largest!). Lumphini Park & Erawan Shrine. Evening: Bangkok Sky Bar for panoramic city views.',chips:['Chatuchak Market','Sky Bar','Erawan Shrine']},
+      {n:'05',t:'Farewell Bangkok',tx:'Morning: Last-minute shopping at Platinum Fashion Mall. Hotel breakfast. Afternoon: Airport transfer and depart to Colombo.',chips:['Platinum Mall','Departure']},
+    ]},
+  pkt:{n:'Phuket Paradise',d:'5 Nights / 6 Days',u:'USD 800',l:'LKR 256,000',ci:'Phuket · Phi Phi Islands',ht:'4★ Beachfront Resort',
+    days:[
+      {n:'01',t:'Phuket Arrival',tx:'Arrive Phuket International Airport. Transfer to your beachfront resort. Evening: Patong Beach sunset and Bangla Road seafood dinner.',chips:['Patong Beach','Bangla Road','Seafood']},
+      {n:'02',t:'Phi Phi Islands Day',tx:'Full Day Speed Boat Tour: Maya Bay (The Beach film location), Monkey Beach, snorkeling at coral gardens, Viking Cave. Swim in crystal Andaman waters.',chips:['Maya Bay','Phi Phi','Snorkeling']},
+      {n:'03',t:'James Bond Island',tx:'Phang Nga Bay tour: James Bond Island, sea kayaking through limestone caves, floating village visit. Afternoon: Old Phuket Town heritage walk.',chips:['James Bond Island','Kayaking','Old Town']},
+      {n:'04',t:'Culture & Elephants',tx:'Big Buddha of Phuket (45m tall). Wat Chalong Temple. Ethical Elephant Sanctuary visit. Evening: Trickeye 3D Museum for fun photos.',chips:['Big Buddha','Elephant Sanctuary','Temples']},
+      {n:'05',t:'Beach & FantaSea',tx:'Leisure at Kata or Karon Beach. Optional water sports. Evening: Phuket FantaSea — spectacular cultural show with acrobatics and elephants.',chips:['Beach Leisure','FantaSea Show','Water Sports']},
+      {n:'06',t:'Farewell Phuket',tx:'Morning hotel breakfast. Final beach walk. Transfer to Phuket International Airport and depart home.',chips:['Departure']},
+    ]},
+  north:{n:'Northern Discovery',d:'6 Nights / 7 Days',u:'USD 950',l:'LKR 304,000',ci:'Bangkok · Chiang Mai · Chiang Rai',ht:'3★ BKK + 4★ Chiang Mai',
+    days:[
+      {n:'01',t:'Bangkok Arrival',tx:'Arrive Bangkok. Hotel check-in. Welcome dinner at a traditional Thai riverside restaurant.',chips:['Bangkok','Welcome Dinner']},
+      {n:'02',t:'Bangkok Highlights',tx:'Grand Palace, Wat Phra Kaew, Wat Pho. Afternoon: Siam shopping district. Evening: Chao Phraya River cruise.',chips:['Grand Palace','Shopping','Cruise']},
+      {n:'03',t:'Bangkok → Chiang Mai',tx:'Chatuchak Market. Jim Thompson House. Evening flight to Chiang Mai (1 hr). Night Bazaar exploration.',chips:['Chatuchak','Night Bazaar']},
+      {n:'04',t:'Chiang Mai Temples',tx:'Doi Suthep sacred mountain temple with panoramic city views. Bhubing Palace. Old City temples: Chedi Luang & Phra Singh.',chips:['Doi Suthep','Old City Temples']},
+      {n:'05',t:'Elephants & Cooking',tx:'Ethical Elephant Nature Park half-day. Thai Cooking Class — learn 4 authentic dishes. Evening Night Bazaar shopping.',chips:['Elephant Sanctuary','Cooking Class']},
+      {n:'06',t:'Chiang Rai Day Trip',tx:'White Temple (Wat Rong Khun), Blue Temple, Black House Museum. Golden Triangle — where Thailand, Laos & Myanmar meet.',chips:['White Temple','Golden Triangle']},
+      {n:'07',t:'Farewell North',tx:'Free morning. Last Night Bazaar shopping. Airport transfer and depart.',chips:['Free Time','Departure']},
+    ]},
+  ult:{n:'Ultimate Thailand',d:'10 Nights / 11 Days',u:'USD 1,750',l:'LKR 560,000',ci:'Bangkok · Chiang Mai · Chiang Rai · Phuket',ht:'4★ & 5★ Mix — VIP',
+    days:[
+      {n:'01',t:'Grand Arrival — Bangkok',tx:'VIP airport transfer. Luxury hotel check-in. Rooftop welcome dinner overlooking the Bangkok skyline.',chips:['VIP Transfer','Luxury Hotel','Bangkok']},
+      {n:'02',t:'Royal Heritage',tx:'Grand Palace, Wat Pho, Wat Arun. ICON SIAM luxury mall. Chao Phraya dinner cruise.',chips:['Grand Palace','ICON SIAM','Dinner Cruise']},
+      {n:'03',t:'Ayutthaya UNESCO',tx:'Full day at Ayutthaya Historical Park (UNESCO World Heritage). Wat Mahathat, Wat Phra Ram. Scenic sunset boat return.',chips:['Ayutthaya','UNESCO Heritage']},
+      {n:'04',t:'Bangkok Shopping',tx:'MBK Center, Chatuchak Market, Platinum Mall. Evening: Sky Bar rooftop dining. Erawan Shrine night visit.',chips:['MBK','Chatuchak','Sky Bar']},
+      {n:'05',t:'Fly to Chiang Mai',tx:'Morning flight to Chiang Mai. Doi Suthep Temple afternoon. Northern Thai khantoke cultural dinner.',chips:['Doi Suthep','Chiang Mai']},
+      {n:'06',t:'Elephants & Culture',tx:'Elephant Nature Park. Thai Cooking Class (4 dishes). Evening cultural show.',chips:['Elephants','Cooking Class']},
+      {n:'07',t:'Chiang Rai',tx:'White Temple, Blue Temple, Black House. Golden Triangle border point.',chips:['White Temple','Golden Triangle']},
+      {n:'08',t:'Fly to Phuket',tx:'Morning flight to Phuket. Patong Beach leisure. Evening: Bangla Road and fresh seafood dinner.',chips:['Phuket','Patong Beach']},
+      {n:'09',t:'Phi Phi Islands',tx:'Full day speed boat: Maya Bay, snorkeling, cliff jumping, Viking Cave.',chips:['Phi Phi','Maya Bay','Snorkeling']},
+      {n:'10',t:'Phang Nga & Culture',tx:'James Bond Island & Phang Nga Bay kayaking. Big Buddha. Wat Chalong Temple.',chips:['James Bond Island','Big Buddha']},
+      {n:'11',t:'Farewell Thailand',tx:'Leisurely breakfast. Final beach walk. Phuket Airport. Depart with memories for a lifetime.',chips:['Beach Walk','Departure']},
+    ]}
+};
+
+function loadItin(key,btn){
+  document.querySelectorAll('.itab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  const d=ITINS[key];
+  document.getElementById('itinLayout').innerHTML=`
+    <div class="itin-panel">
+      <div class="ip-name">${d.n}</div><div class="ip-dur">${d.d}</div>
+      <div class="ip-pricebox"><div class="ip-usd">${d.u}</div><div class="ip-lkr">${d.l} per person</div></div>
+      <div class="ip-row"><span class="ip-icon">📍</span><span>${d.ci}</span></div>
+      <div class="ip-row"><span class="ip-icon">🏨</span><span>${d.ht}</span></div>
+      <div class="ip-row"><span class="ip-icon">🍳</span><span>Daily Breakfast Included</span></div>
+      <div class="ip-row"><span class="ip-icon">✈</span><span>Airport Transfers Included</span></div>
+      <div class="ip-row"><span class="ip-icon">📱</span><span>24/7 WhatsApp Support</span></div>
+      <button class="btn-book" style="margin-top:18px" onclick="openModal('${d.n}','${d.u.replace('USD ','')}','${d.l.replace('LKR ','')}')">Book This Package</button>
+    </div>
+    <div class="itin-days">
+      ${d.days.map((day,i)=>`
+        <div class="day-row">
+          <div class="day-num-col">
+            <div class="day-circle">${day.n}</div>
+            ${i<d.days.length-1?'<div class="day-connector"></div>':''}
+          </div>
+          <div class="day-box">
+            <div class="day-title">Day ${day.n} — ${day.t}</div>
+            <div class="day-text">${day.tx}</div>
+            <div class="day-chips">${day.chips.map(c=>`<span class="dchip">${c}</span>`).join('')}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+loadItin('bkk',null);
+document.querySelector('.itab').classList.add('on');
+
+// ── PLANNER ──
+let addons=0;
+function toggleAddon(el){
+  el.classList.toggle('on');
+  addons=0;
+  document.querySelectorAll('.ci.on').forEach(c=>addons+=parseInt(c.dataset.p));
+  calcCost();
+}
+function calcCost(){
+  const sel=document.getElementById('duration');
+  const base=parseInt(sel.options[sel.selectedIndex].dataset.base)||550;
+  const nights=parseInt(sel.value)-1;
+  const hotelUp=parseInt(document.getElementById('hotel').value)*nights;
+  const t=parseInt(document.getElementById('travelers').value);
+  const perP=base+hotelUp+addons;
+  let total=perP*t;
+  const disc=t>=5;
+  document.getElementById('discDiv').style.display=disc?'block':'none';
+  if(disc)total=Math.round(total*.95);
+  document.getElementById('sBase').textContent='USD '+base.toLocaleString();
+  document.getElementById('sHotel').textContent='USD '+hotelUp.toLocaleString();
+  document.getElementById('sAddons').textContent='USD '+addons.toLocaleString();
+  document.getElementById('sTrav').textContent=t+' person'+(t>1?'s':'');
+  document.getElementById('sfUSD').textContent='USD '+total.toLocaleString();
+  document.getElementById('sfLKR').textContent='LKR '+(total*320).toLocaleString();
+}
+calcCost();
+
+// ── MODAL ──
+function openModal(name,usd,lkr){
+  document.getElementById('mPkg').textContent=name;
+  document.getElementById('mUSD').textContent='USD '+usd;
+  document.getElementById('mLKR').textContent='LKR '+lkr+' per person';
+  document.getElementById('modal').classList.add('open');
+}
+function openPlannerModal(){
+  openModal('Custom Package',document.getElementById('sfUSD').textContent.replace('USD ',''),document.getElementById('sfLKR').textContent.replace('LKR ',''));
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
+
+// ── NOTIFY ──
+function notify(d){alert('You\'ve been added to the '+d+' early access list! We\'ll notify you when it launches. 🙏')}
+function signUp(btn,d){
+  const inp=btn.previousElementSibling;
+  if(!inp.value){inp.focus();return;}
+  btn.textContent='✓ Done!';btn.style.background='#4ADE80';btn.style.color='#000';
+  setTimeout(()=>alert('You\'re on the list for '+d+'! We\'ll email you when packages launch. 🙏'),200);
+}
+</script>
+</body>
+</html>
